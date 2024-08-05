@@ -48,8 +48,7 @@
 
 | <img src="https://profilinator.rishav.dev/skills-assets/java-original-wordmark.svg" alt="Java" width="50px" height="50px" /> | <img src="https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png" alt="Spring boot" width="50px" height="50px" /> |
 | :--------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
-|                                                             Java                                                             |                                          
-Spring boot                                                         |
+|                                                             Java                                                             |                                                   Spring boot                                                           |
 
 | <img src="https://media.vlpt.us/images/wavvy1022/post/d05e49ea-341a-4e6a-80db-ff322533464a/jpa.png" alt="JPA" width="50px" height="50px" /> |
 | :-----------------------------------------------------------------------------------------------------------------------------------------: |
