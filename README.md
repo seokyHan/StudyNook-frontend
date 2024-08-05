@@ -46,7 +46,7 @@
 
 ### **Back-end**
 
-| <img src="https://profilinator.rishav.dev/skills-assets/java-original-wordmark.svg" alt="Java" width="50px" height="50px" /> | <img src="https://perfectacle.github.io/2018/07/22/spring-boot-2-env/thumb.png" alt="Spring boot" width="50px" height="50px" /> |
+| <img src="https://profilinator.rishav.dev/skills-assets/java-original-wordmark.svg" alt="Java" width="50px" height="50px" /> | <img src="https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png" alt="Spring boot" width="50px" height="50px" /> |
 | :--------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
 |                                                             Java                                                             |                                                             Spring boot                                                           |
 
@@ -54,7 +54,7 @@
 | :-----------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                     JPA                                                                     |
 
-| <img src="https://profilinator.rishav.dev/skills-assets/mysql-original-wordmark.svg" alt="MySQL" width="50px" height="50px" /> |
+| <img src="https://mariadb.com/wp-content/uploads/2019/11/mariadb-logo-vert_blue-transparent-600x489.png" alt="MySQL" width="50px" height="50px" /> |
 | :----------------------------------------------------------------------------------------------------------------------------: |
 |                                                             MySQL                                                              |
 
