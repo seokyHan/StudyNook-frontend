@@ -10,5 +10,10 @@ export default new VueRouter({
       y: 0,
     };
   },
-  routes: [],
+  routes: [
+    {
+      path: '/',
+      component: () => import('@/views/MainPage.vue'),
+    },
+  ],
 });
