@@ -1,0 +1,41 @@
+.groups {
+  /* width: auto; */
+  overflow: hidden;
+  height: auto;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  /* transition: height 0.4s; */
+}
+/* .group {
+  background-color: red;
+  border-top: 1px solid red;
+} */
+
+.groups .group-item {
+  display: flex;
+  flex-wrap: wrap;
+  /* padding: 0;
+  margin: 0; */
+  list-style: none;
+  margin: 100px auto;
+  padding: 0 20px;
+  gap: 50px;
+  width: 1366px;
+}
+
+.groups .group-item a.item-box {
+  width: 294px;
+  height: 340px;
+  border: 2px solid green;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.groups .group-item .item {
+  width: 310px;
+  /* border: 2px solid rgb(209, 209, 209); */
+  padding: 0;
+  margin: 0;
+  border-radius: 20px;
+}
