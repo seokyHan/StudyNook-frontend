@@ -41,18 +41,33 @@
           <div class="item__name">menu4</div>
         </li>
       </ul>
+      <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
+        <LoginPopupContent />
+      </LoginPopup>
       <div class="button-list">
-        <button class="fast white" v-html="formattedButtonText"></button>
+        <button
+          class="fast white"
+          @click="isLoginModal = true"
+          v-html="formattedButtonText"
+        ></button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import LoginPopup from '@/components/common/PopupView.vue';
+import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
+
 export default {
+  components: {
+    LoginPopup,
+    LoginPopupContent,
+  },
   data() {
     return {
       buttonText: '로그인',
+      isLoginModal: false,
     };
   },
   computed: {
