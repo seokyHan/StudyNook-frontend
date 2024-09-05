@@ -1,0 +1,62 @@
+.login-box {
+  width: 400px;
+  position: relative;
+  height: 380px;
+}
+
+.login-box .login-intro {
+  position: relative;
+  bottom: 80px;
+  left: 49px;
+}
+
+.login-box .login-intro > img {
+  width: 75%;
+}
+
+.login-box > div > div {
+  border-radius: 12px;
+}
+
+.login-box > div > div > img {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  top: 6px;
+  left: 90px;
+}
+
+.login-box .login-button-group {
+  position: relative;
+  top: -165px;
+  margin: auto 25px;
+}
+
+.login-box .login-button-group div {
+  display: flex;
+  margin-bottom: 20px;
+  cursor: pointer;
+  height: 60px;
+}
+
+.login-box .login-button-group div > div {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  position: relative;
+  top: 18px;
+  left: 100px;
+}
+
+.login-box .login-button-group .kako-btn {
+  background-color: #ffeb3b;
+}
+
+.login-box .login-button-group .naver-btn {
+  background-color: rgb(30, 200, 0);
+}
+
+.login-box .login-button-group .google-btn {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+}
