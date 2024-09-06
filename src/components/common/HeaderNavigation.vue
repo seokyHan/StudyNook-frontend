@@ -44,19 +44,88 @@
       <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
         <LoginPopupContent />
       </LoginPopup>
-      <div class="button-list">
-        <button
-          class="fast white"
-          @click="isLoginModal = true"
-          v-html="formattedButtonText"
-        ></button>
-      </div>
+      <template v-if="isLogin">
+        <div class="button-list">
+          <button
+            class="fast white"
+            @click="isLoginModal = true"
+            v-html="formattedButtonText"
+          ></button>
+        </div>
+      </template>
+      <template v-else>
+        <div class="header__user">
+          <ADropdown-button size="large">
+            {{ getNickname }}
+            <AMenu slot="overlay" style="padding: 0; border-radius: 3px">
+              <AMenu-item
+                key="1"
+                style="
+                  padding: 16px 25px;
+                  border-bottom: 1px solid #e9e9e9;
+                  border-radius: 3px 3px 0 0;
+                "
+              >
+                <RouterLink
+                  to="/account/edit"
+                  style="
+                    width: 200px;
+                    font-size: 16px;
+                    font-family: 'Noto Sans KR', 'sans-serif';
+                  "
+                >
+                  내 정보
+                </RouterLink>
+              </AMenu-item>
+              <AMenu-item
+                key="2"
+                style="padding: 16px 25px; border-bottom: 1px solid #e9e9e9"
+              >
+                <RouterLink
+                  to="/account/inquiry-list"
+                  style="
+                    width: 200px;
+                    font-size: 16px;
+                    font-family: 'Noto Sans KR', 'sans-serif';
+                  "
+                >
+                  1:1 문의 내역
+                </RouterLink>
+              </AMenu-item>
+              <AMenu-item
+                key="3"
+                style="
+                  padding: 16px 10px;
+                  border: none;
+                  border-radius: 0 0 3px 3px;
+                "
+              >
+                <AButton
+                  @click="showConfirm"
+                  style="
+                    width: 200px;
+                    border: none;
+                    background-color: transparent;
+                    font-size: 16px;
+                    text-align: left;
+                    cursor: pointer;
+                    font-family: 'Noto Sans KR', 'sans-serif';
+                  "
+                >
+                  로그아웃
+                </AButton>
+              </AMenu-item>
+            </AMenu>
+            <AIcon slot="icon" type="user" />
+          </ADropdown-button>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
-import LoginPopup from '@/components/common/PopupView.vue';
+import LoginPopup from '@/views/PopupView.vue';
 import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
 
 export default {
@@ -68,6 +137,7 @@ export default {
     return {
       buttonText: '로그인',
       isLoginModal: false,
+      isLogin: true,
     };
   },
   computed: {
