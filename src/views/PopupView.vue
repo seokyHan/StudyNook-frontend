@@ -11,6 +11,6 @@
 export default {};
 </script>
 
-<style lang="scss">
+<style lang="css">
 @import './css/popup.css';
 </style>
