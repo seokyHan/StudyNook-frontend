@@ -13,13 +13,14 @@
 }
 
 .modal-box {
+  border-radius: 30px;
   position: relative;
-  max-width: 80%;
+  max-width: fit-content;
   margin: auto;
   margin-top: 500px;
   padding: 20px;
   background-color: white;
-  min-height: 500px;
+  min-height: 300px;
   z-index: 10;
   opacity: 1;
 }
