@@ -7,10 +7,6 @@
   overflow: hidden;
   /* transition: height 0.4s; */
 }
-/* .group {
-  background-color: red;
-  border-top: 1px solid red;
-} */
 
 .groups .group-item {
   display: flex;
@@ -27,7 +23,7 @@
 .groups .group-item a.item-box {
   width: 294px;
   height: 340px;
-  border: 2px solid green;
+  border: 2px solid #979ea9;
   cursor: pointer;
   border-radius: 30px;
 }
@@ -38,4 +34,24 @@
   padding: 0;
   margin: 0;
   border-radius: 20px;
+}
+
+.groups .group-item .item .bookmark {
+}
+
+.groups .group-item .item .bookmark > img {
+  width: 32px;
+  height: 32px;
+}
+
+.groups .group-item .item > h2 {
+  margin: 16px auto;
+  font-weight: bold;
+  font-size: 19px;
+  padding: 9px;
+}
+
+.groups .group-item .item .underline {
+  border-bottom: 2px solid #f2f2f2;
+  width: 265px;
 }

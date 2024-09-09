@@ -1,6 +1,6 @@
 button.white {
   --background: #fff;
-  --text: #4440b3;
+  --text: #431a18;
   --shadow: 0 2px 8px -1px rgba(18, 22, 33, 0.04);
   --shadow-hover: 0 4px 20px -2px rgba(18, 22, 33, 0.12);
 }
@@ -13,7 +13,7 @@ button {
   --font-size: 20px;
   --duration: 0.44s;
   --move-hover: -4px;
-  --shadow: 0 2px 8px -1px rgba(39, 94, 254, 0.32);
+  --shadow: 0 2px 8px -1px #b4aee8;
   --shadow-hover: 0 4px 20px -2px rgba(39, 94, 254, 0.5);
   --font-shadow: var(--font-size);
   cursor: pointer;
