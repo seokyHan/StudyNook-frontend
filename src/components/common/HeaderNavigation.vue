@@ -44,7 +44,7 @@
       <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
         <LoginPopupContent />
       </LoginPopup>
-      <template v-if="isLogin">
+      <template v-if="!getIsLogin">
         <div class="button-list">
           <button
             class="fast white"
@@ -127,6 +127,15 @@
 <script>
 import LoginPopup from '@/views/PopupView.vue';
 import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
+import {showAlert} from '@/utils/alertUtils';
+import {
+  getIsSocialLoginFirst,
+  getAcessTokenFromCookie,
+  getSocialLogin,
+  saveisLogin,
+  deleteCookie,
+} from '@/utils/cookies';
+import {mapGetters} from 'vuex';
 
 export default {
   components: {
@@ -137,16 +146,57 @@ export default {
     return {
       buttonText: '로그인',
       isLoginModal: false,
-      isLogin: true,
     };
   },
+  created() {
+    if (getIsSocialLoginFirst()) {
+      showAlert('회원가입이 완료되었습니다.', 'success', 1500);
+    }
+
+    if (getSocialLogin() === 'success') {
+      saveisLogin('socialLogin');
+      deleteCookie('isFirst');
+      deleteCookie('accessToken');
+      deleteCookie('socialLogin');
+      this.$store.commit(
+        'memberStore/SET_ACCESTOKEN',
+        getAcessTokenFromCookie(),
+      );
+      this.$router.go();
+    }
+  },
   computed: {
+    ...mapGetters('memberStore', ['getNickname', 'getIsLogin']),
     formattedButtonText() {
       return (
         '<div><span>' +
         this.buttonText.trim().split('').join('</span><span>') +
         '</span></div>'
       );
+    },
+  },
+  methods: {
+    showConfirm() {
+      const headerNavigation = this;
+      this.$confirm({
+        title: () => (
+          <h1 style="font-size: 18px; font-weight: 200; font-family: 'Noto Sans KR', 'sans-serif'; color: #000;">
+            로그아웃 하시겠습니까?
+          </h1>
+        ),
+        okText: '확인',
+        cancelText: '취소',
+        onOk() {
+          headerNavigation.userLogout();
+        },
+        onCancel() {},
+        class: 'test',
+      });
+    },
+    userLogout() {
+      this.$store.dispatch('memberStore/LOGOUT');
+
+      this.$router.push('/').catch(() => {});
     },
   },
 };
