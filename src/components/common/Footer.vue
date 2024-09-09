@@ -17,7 +17,7 @@
 
       <div class="info">
         <span>사업자등록번호 2022-01-29</span>
-        <span>(주)스눅 대장 김유신</span>
+        <span>❤️(주)스눅 돼장 김유신❤️</span>
         <span>TEL : 02) 3015-1100 / FAX : 02) 3015-1106</span>
         <span>강아지 : 한석희</span>
       </div>
