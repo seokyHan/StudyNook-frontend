@@ -21,6 +21,7 @@ export function setInterceptors(instance) {
 
 async function addAuthHeader(request) {
   const token = store.getters['memberStore/getAccessToken'];
+
   if (!token) {
     const {data} = await reissue();
     store.commit('memberStore/SET_ACCESTOKEN', data.accessToken);

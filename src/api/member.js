@@ -1,11 +1,11 @@
 import {instance, instanceWithAuth} from '@/api/index';
 
 function reissue() {
-  return instance.post('/users/reissue');
+  return instance.post('/members/reissue');
 }
 
-function userLogOut() {
-  return instanceWithAuth.post('/users/logout');
+function memberLogOut() {
+  return instanceWithAuth.post('/members/logout');
 }
 
-export {userLogOut, reissue};
+export {memberLogOut, reissue};
