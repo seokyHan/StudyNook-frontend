@@ -28,6 +28,10 @@
   border-radius: 30px;
 }
 
+.groups .group-item a.item-box > li {
+  position: relative;
+}
+
 .groups .group-item .item {
   width: 310px;
   /* border: 2px solid rgb(209, 209, 209); */
@@ -36,22 +40,31 @@
   border-radius: 20px;
 }
 
+.groups .group-item .item .bg-update > span {
+  color: #ffde4d;
+  background-color: #fffbda;
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid #ffde4d;
+  margin: 15px;
+}
+
 .groups .group-item .item .bookmark {
 }
 
 .groups .group-item .item .bookmark > img {
   width: 32px;
   height: 32px;
+  position: relative;
+  left: 238px;
+  top: 25px;
 }
 
 .groups .group-item .item > h2 {
-  margin: 16px auto;
+  margin: 12px 10px;
   font-weight: bold;
   font-size: 19px;
   padding: 9px;
-}
-
-.groups .group-item .item .underline {
-  border-bottom: 2px solid #f2f2f2;
-  width: 265px;
+  width: 250px;
+  line-height: 33px;
 }
