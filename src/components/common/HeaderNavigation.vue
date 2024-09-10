@@ -56,7 +56,7 @@
 <script>
 import LoginPopup from '@/views/PopupView.vue';
 import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
-import { showAlert } from '@/utils/alertUtils';
+import {showAlert} from '@/utils/alertUtils';
 import {
   getIsSocialLoginFirst,
   getAcessTokenFromCookie,
@@ -64,7 +64,7 @@ import {
   saveisLogin,
   deleteCookie,
 } from '@/utils/cookies';
-import { mapGetters } from 'vuex';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 
 export default {
   components: {
@@ -77,8 +77,8 @@ export default {
       isLoginModal: false,
       menuItems: ['menu1', 'menu2', 'menu3', 'menu4'],
       userMenuOptions: [
-        { label: '내 정보', link: '/account/edit' },
-        { label: '1:1 문의 내역', link: '/account/inquiry-list' },
+        {label: '내 정보', link: '/account/edit'},
+        {label: '1:1 문의 내역', link: '/account/inquiry-list'},
       ],
     };
   },
@@ -88,27 +88,33 @@ export default {
   computed: {
     ...mapGetters('memberStore', ['getNickname', 'getIsLogin']),
     formattedButtonText() {
-      return this.buttonText
-        .split('')
-        .map((char) => `<span>${char}</span>`)
-        .join('');
+      return (
+        '<div><span>' +
+        this.buttonText.trim().split('').join('</span><span>') +
+        '</span></div>'
+      );
     },
   },
   methods: {
-    handleSocialLogin() {
+    ...mapMutations('memberStore', ['SET_ISLOGIN']),
+    ...mapActions('memberStore', ['LOGOUT']),
+    async handleSocialLogin() {
       if (getIsSocialLoginFirst()) {
         showAlert('회원가입이 완료되었습니다.', 'success', 1500);
       }
 
       if (getSocialLogin() === 'success') {
         saveisLogin('socialLogin');
-        const cookiesToDelete = ['isFirst', 'accessToken', 'socialLogin'];
-        cookiesToDelete.forEach((cookie) => deleteCookie(cookie));
+        this.$store.commit('memberStore/SET_ISLOGIN', true);
         this.$store.commit(
           'memberStore/SET_ACCESTOKEN',
-          getAcessTokenFromCookie()
+          getAcessTokenFromCookie(),
         );
-        this.$router.go();
+
+        const cookiesToDelete = ['isFirst', 'accessToken', 'socialLogin'];
+        cookiesToDelete.forEach((cookie) => deleteCookie(cookie));
+
+        await this.$router.push('/').catch(() => {});
       }
     },
     showConfirm() {
@@ -119,9 +125,10 @@ export default {
         onOk: this.userLogout,
       });
     },
-    userLogout() {
-      this.$store.dispatch('memberStore/LOGOUT');
-      this.$router.push('/').catch(() => {});
+    async userLogout() {
+      this.LOGOUT();
+      this.SET_ISLOGIN(false);
+      await this.$router.push('/').catch(() => {});
     },
   },
 };

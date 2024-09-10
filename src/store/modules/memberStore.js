@@ -6,7 +6,7 @@ import {
   deleteIsLogin,
   clearAllCookies,
 } from '@/utils/cookies';
-import {userLogOut} from '@/api/member';
+import {memberLogOut} from '@/api/member';
 
 const memberStore = {
   namespaced: true,
@@ -60,7 +60,7 @@ const memberStore = {
   },
   actions: {
     async LOGOUT({commit}, data) {
-      await userLogOut(data);
+      await memberLogOut(data);
       clearAllCookies();
       deleteIsLogin();
       commit('CLEAR_ALL');

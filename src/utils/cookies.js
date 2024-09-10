@@ -59,7 +59,7 @@ function deleteCookie(value) {
 function clearAllCookies() {
   deleteCookie('id');
   deleteCookie('email');
-  deleteCookie('nickname');
+  deleteCookie('nickName');
 }
 
 export {
