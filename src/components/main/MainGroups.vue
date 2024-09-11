@@ -9,10 +9,20 @@
           <div class="bg-update">
             <span>✨ 2일전 업데이트</span>
           </div>
-          <h2 class="group-name">
+          <h2 class="group-intro">
             🐤오리와 강아지의 스터디 맴버를 모집합니다~!🐶
           </h2>
-          <div class="bg-group"></div>
+          <div class="group-name">by 오리대장</div>
+          <div class="bg-group">
+            <ul>
+              <li>
+                <span> 백엔드 </span>
+              </li>
+              <li>
+                <span> 알고리즘 </span>
+              </li>
+            </ul>
+          </div>
         </li>
       </a>
       <a class="item-box">

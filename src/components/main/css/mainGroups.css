@@ -68,3 +68,29 @@
   width: 250px;
   line-height: 33px;
 }
+
+.groups .group-item .item .group-name {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: bold;
+  font-weight: bold;
+  margin: auto 20px;
+}
+
+.groups .group-item .item .bg-group {
+  margin: 23px auto;
+}
+
+.groups .group-item .item .bg-group > ul {
+  display: flex;
+  margin: 9px;
+}
+
+.groups .group-item .item .bg-group > ul > li {
+  padding: 6px;
+  border-radius: 10px;
+  /* border: 1px solid #ff8343; */
+  background-color: #f1dec6;
+  color: #ff8343;
+  margin: 15px;
+  margin: 5px;
+}
