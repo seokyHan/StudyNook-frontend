@@ -96,7 +96,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('memberStore', ['SET_ISLOGIN']),
+    ...mapMutations('memberStore', ['SET_ISLOGIN', 'SET_ACCESTOKEN']),
     ...mapActions('memberStore', ['LOGOUT']),
     async handleSocialLogin() {
       if (getIsSocialLoginFirst()) {
@@ -105,11 +105,8 @@ export default {
 
       if (getSocialLogin() === 'success') {
         saveisLogin('socialLogin');
-        this.$store.commit('memberStore/SET_ISLOGIN', true);
-        this.$store.commit(
-          'memberStore/SET_ACCESTOKEN',
-          getAcessTokenFromCookie(),
-        );
+        this.SET_ISLOGIN('memberStore/SET_ISLOGIN', true);
+        this.SET_ACCESTOKEN(getAcessTokenFromCookie());
 
         const cookiesToDelete = ['isFirst', 'accessToken', 'socialLogin'];
         cookiesToDelete.forEach((cookie) => deleteCookie(cookie));
