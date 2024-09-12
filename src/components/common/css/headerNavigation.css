@@ -195,37 +195,6 @@ header .badges .badge {
   cursor: pointer;
 }
 
-.user-menu {
-  padding: 0;
-  border-radius: 3px;
-}
-
-.user-menu-item {
-  padding: 16px 25px;
-  border-bottom: 1px solid #e9e9e9;
-}
-
-.logout-item {
-  padding: 16px 10px;
-  border: none;
-}
-
-.logout-button {
-  width: 200px;
-  border: none;
-  background-color: transparent;
-  font-size: 16px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.confirm-title {
-  font-size: 18px;
-  font-weight: 200;
-  font-family: 'Noto Sans KR', 'sans-serif';
-  color: #000;
-}
-
 /*INNER*/
 .inner {
   width: 1100px;

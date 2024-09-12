@@ -29,20 +29,63 @@
         <div class="header__user">
           <ADropdown-button size="large">
             {{ getNickname }}
-            <AMenu slot="overlay" class="user-menu">
+            <AMenu slot="overlay" style="padding: 0; border-radius: 3px">
               <AMenu-item
-                v-for="(option, index) in userMenuOptions"
-                :key="index"
-                class="user-menu-item"
+                key="1"
+                style="
+                  padding: 16px 25px;
+                  border-bottom: 1px solid #e9e9e9;
+                  border-radius: 3px 3px 0 0;
+                "
               >
-                <RouterLink :to="option.link" class="user-menu-link">{{
-                  option.label
-                }}</RouterLink>
-              </AMenu-item>
-              <AMenu-item class="logout-item">
-                <AButton @click="showConfirm" class="logout-button"
-                  >로그아웃</AButton
+                <RouterLink
+                  to="/account/edit"
+                  style="
+                    width: 200px;
+                    font-size: 16px;
+                    font-family: 'Noto Sans KR', 'sans-serif';
+                  "
                 >
+                  내 정보
+                </RouterLink>
+              </AMenu-item>
+              <AMenu-item
+                key="2"
+                style="padding: 16px 25px; border-bottom: 1px solid #e9e9e9"
+              >
+                <RouterLink
+                  to="/account/inquiry-list"
+                  style="
+                    width: 200px;
+                    font-size: 16px;
+                    font-family: 'Noto Sans KR', 'sans-serif';
+                  "
+                >
+                  1:1 문의 내역
+                </RouterLink>
+              </AMenu-item>
+              <AMenu-item
+                key="3"
+                style="
+                  padding: 16px 10px;
+                  border: none;
+                  border-radius: 0 0 3px 3px;
+                "
+              >
+                <AButton
+                  @click="showConfirm"
+                  style="
+                    width: 200px;
+                    border: none;
+                    background-color: transparent;
+                    font-size: 16px;
+                    text-align: left;
+                    cursor: pointer;
+                    font-family: 'Noto Sans KR', 'sans-serif';
+                  "
+                >
+                  로그아웃
+                </AButton>
               </AMenu-item>
             </AMenu>
             <AIcon slot="icon" type="user" />
@@ -100,7 +143,7 @@ export default {
     ...mapActions('memberStore', ['LOGOUT']),
     async handleSocialLogin() {
       if (getIsSocialLoginFirst()) {
-        showAlert('회원가입이 완료되었습니다.', 'success', 1500);
+        showAlert('가입이 완료되었습니다.', 'success', 1500);
       }
 
       if (getSocialLogin() === 'success') {
