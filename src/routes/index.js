@@ -15,5 +15,9 @@ export default new VueRouter({
       path: '/',
       component: () => import('@/views/MainPage.vue'),
     },
+    {
+      path: '/account/edit',
+      component: () => import('@/views/account/AccountEditPage.vue'),
+    },
   ],
 });
