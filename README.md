@@ -23,7 +23,7 @@
 
 <br />
 
-<!-- [**🔗 '오늘의 부동산' Back-end 저장소로 바로가기 Click !**](https://github.com/seokyHan/todaysroom-backend) 👈 -->
+<!-- [**🔗 '오늘의 부동산' Back-end 저장소로 바로가기 Click !**](https://github.com/seokyHan/studynook-backend) 👈 -->
 
 > 새 창 열기 방법 : CTRL+click (on Windows and Linux) | CMD+click (on MacOS)
 
