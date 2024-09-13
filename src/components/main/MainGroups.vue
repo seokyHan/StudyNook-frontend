@@ -1,5 +1,8 @@
 <template>
   <section class="groups">
+    <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
+      <LoginPopupContent />
+    </LoginPopup>
     <ul class="group-item">
       <a class="item-box">
         <li class="item">
@@ -63,7 +66,23 @@
 </template>
 
 <script>
-export default {};
+// import LoginPopup from '@/views/PopupView.vue';
+// import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
+// import { mapActions, mapGetters, mapMutations } from 'vuex';
+
+// export default {
+//   components: {
+//     LoginPopup,
+//     LoginPopupContent,
+//   },
+//   computed: {
+//     ...mapGetters('memberStore', ['getNickname', 'getIsLogin']),
+//   },
+//   methods: {
+//     ...mapMutations('memberStore', ['SET_ISLOGIN', 'SET_ACCESTOKEN']),
+//     ...mapActions('memberStore', ['LOGOUT']),
+//   },
+// };
 </script>
 
 <style lang="css" scoped>
