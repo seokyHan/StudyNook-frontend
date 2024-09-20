@@ -1,8 +1,8 @@
 <template>
   <section class="groups">
-    <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
+    <!-- <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
       <LoginPopupContent />
-    </LoginPopup>
+    </LoginPopup> -->
     <ul class="group-item">
       <a class="item-box">
         <li class="item">
