@@ -1,0 +1,115 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  padding: 20px;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.back-button {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.step-indicator span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.step-indicator span.active {
+  background: #4caf50;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin: 15px 0;
+  text-align: left; /* 왼쪽 정렬 */
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.public-private {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  margin-top: 10px;
+}
+
+.public-private label {
+  margin: 0 15px; /* 간격 조정 */
+}
+
+.options {
+  margin: 20px 0;
+}
+
+.options button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.options button:hover {
+  background: #e0e0e0;
+}
+
+.next-button {
+  background: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto; 
+}
+
+.next-button:hover {
+  background: #45a049;
+}
