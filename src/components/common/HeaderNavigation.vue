@@ -15,7 +15,7 @@
         <LoginPopupContent />
       </LoginPopup>
 
-      <!-- <SignupPopupContent v-if="isVisible" /> -->
+      <SignupPopupContent v-if="isVisible" />
 
       <template v-if="!getIsLogin">
         <div class="button-list">
@@ -101,7 +101,7 @@
 <script>
 import LoginPopup from '@/views/PopupView.vue';
 import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
-// import SignupPopupContent from '@/components/user/SignupPopupContent.vue';
+import SignupPopupContent from '@/components/user/SignupPopupContent.vue';
 import {showAlert} from '@/utils/alertUtils';
 import {
   getIsSocialLoginFirst,
@@ -116,13 +116,13 @@ export default {
   components: {
     LoginPopup,
     LoginPopupContent,
-    // SignupPopupContent,
+    SignupPopupContent,
   },
   data() {
     return {
       buttonText: '로그인',
       isLoginModal: false,
-      // isVisible: true,
+      isVisible: true,
       menuItems: ['menu1', 'menu2', 'menu3', 'menu4'],
     };
   },

@@ -10,35 +10,41 @@
         <span :class="{active: currentStep === 2}">3</span>
         <span :class="{active: currentStep === 3}">4</span>
       </div>
-      <h2 class="title">{{ stepTitles[currentStep] }}</h2>
+      <h3 class="title">{{ stepTitles[currentStep] }}</h3>
 
       <div class="form-group" v-if="currentStep === 0">
-        <label>직무를 입력해 주세요 *</label>
-        <select v-model="job">
-          <option>직무 선택</option>
-          <option>개발</option>
-          <option>디자인</option>
-        </select>
-        <label>경력을 입력해 주세요 *</label>
-        <select v-model="experience">
-          <option>경력 선택</option>
-          <option>1년</option>
-          <option>2년</option>
-        </select>
-        <label>소속을 입력해 주세요 *</label>
-        <input v-model="affiliation" placeholder="소속 학교 또는 직장 입력" />
-
-        <label>공개 여부 *</label>
-        <div class="public-private">
-          <label>
-            <input type="radio" v-model="visibility" value="공개" />
-            공개
-          </label>
-          <label>
-            <input type="radio" v-model="visibility" value="비공개" />
-            비공개
-          </label>
+        <div class="label-group">
+          <label>직무를 입력해 주세요 <span class="red_txt">*</span></label>
+          <label style="margin-left: 15px"
+            >경력을 입력해 주세요 <span class="red_txt">*</span></label
+          >
         </div>
+        <div class="label-group">
+          <select v-model="job">
+            <option disabled selected hidden>직무 선택</option>
+            <option>개발</option>
+            <option>디자인</option>
+          </select>
+          <select v-model="experience" style="margin-left: 15px">
+            <option disabled selected hidden>경력 선택</option>
+            <option>1년</option>
+            <option>2년</option>
+          </select>
+        </div>
+        <div class="label-group">
+          <label>소속을 입력해 주세요</label>
+          <div class="public-private">
+            <input type="radio" v-model="visibility" value="공개" />
+            <label class="public-private radio"> 공개 </label>
+            <input type="radio" v-model="visibility" value="비공개" />
+            <label class="public-private radio"> 비공개 </label>
+          </div>
+        </div>
+        <input
+          class="affiliation"
+          v-model="affiliation"
+          placeholder="소속 학교 또는 직장 입력"
+        />
       </div>
 
       <div class="form-group" v-else-if="currentStep === 1">
@@ -78,8 +84,8 @@ export default {
     return {
       isVisible: true,
       currentStep: 0,
-      job: '',
-      experience: '',
+      job: '직무 선택',
+      experience: '경력 선택',
       affiliation: '',
       visibility: '공개',
       selectedState: '',
@@ -98,7 +104,7 @@ export default {
   },
   methods: {
     nextStep() {
-      if (this.currentStep < this.stepTitles.length - 1) {
+      if (this.currentStep < this.stepTitles.length) {
         this.currentStep++;
       } else {
         this.isVisible = false;
