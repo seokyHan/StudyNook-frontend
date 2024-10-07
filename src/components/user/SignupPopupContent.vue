@@ -1,13 +1,21 @@
 <template>
   <div v-if="isVisible" class="popup">
     <div class="popup-content">
-      <button class="back-button" @click="goBack" v-if="currentStep > 0">
-        뒤로 가기
-      </button>
+      <div>
+        <div
+          class="material-icons back-button"
+          @click="goBack"
+          v-if="currentStep > 0"
+        >
+          arrow_back_ios
+        </div>
+
+        <div class="material-icons">close</div>
+      </div>
       <div class="step-indicator">
-        <span :class="{active: currentStep === 0}">1</span>
-        <span :class="{active: currentStep === 1}">2</span>
-        <span :class="{active: currentStep === 2}">3</span>
+        <span :class="{active: currentStep === 0}">1</span> -
+        <span :class="{active: currentStep === 1}">2</span> -
+        <span :class="{active: currentStep === 2}">3</span> -
         <span :class="{active: currentStep === 3}">4</span>
       </div>
       <h3 class="title">{{ stepTitles[currentStep] }}</h3>

@@ -79,17 +79,18 @@ input::placeholder {
 }
 
 .label-group label {
-  flex: 1; /* 동일한 너비를 가짐 */
-  margin-right: 10px; /* 간격 조정 */
-  text-align: left; /* 왼쪽 정렬 */
+  flex: 1; 
+  margin-right: 10px; 
+  margin-top: 10px;
+  text-align: left; 
 }
 
 .label-group select {
-  flex: 1; /* 더 넓은 너비를 가짐 */
+  flex: 1; 
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%; /* 가로 길이를 100%로 설정 */
+  width: 100%; 
 }
 
 .public-private {
@@ -98,17 +99,35 @@ input::placeholder {
   margin-top: 10px; 
 }
 
-.public-private .radio {
+.public-private label {
   width: 30px;
-  vertical-align: -30px;
-  margin-right: -5px; 
+  margin-right: -1px; 
+  padding: 0 0 10px;
   font-size: 10px; 
+}
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  appearance: none; 
+  width: 13px;
+  height: 13px;
+  border: 2px solid #ccc; 
+  border-radius: 50%;
+  outline: none; 
+  cursor: pointer;
+}
+
+input[type='radio']:checked {
+  background-color: #61d6bd; 
+  border: 3px solid white; 
+  box-shadow: 0 0 0 1.6px #61d6bd;
 }
 
 .affiliation {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
+  margin-top: -10px;
   border: 1px solid #ccc;
   border-radius: 4px; 
 }
