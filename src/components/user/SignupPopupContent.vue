@@ -1,21 +1,26 @@
 <template>
   <div v-if="isVisible" class="popup">
     <div class="popup-content">
-      <div>
-        <div
+      <div class="popup-header">
+        <span
           class="material-icons back-button"
           @click="goBack"
           v-if="currentStep > 0"
         >
           arrow_back_ios
-        </div>
+        </span>
 
-        <div class="material-icons">close</div>
+        <span class="material-icons close-button" @click="closePopup"
+          >close</span
+        >
       </div>
       <div class="step-indicator">
-        <span :class="{active: currentStep === 0}">1</span> -
-        <span :class="{active: currentStep === 1}">2</span> -
-        <span :class="{active: currentStep === 2}">3</span> -
+        <span :class="{active: currentStep === 0}">1</span>
+        <p>-</p>
+        <span :class="{active: currentStep === 1}">2</span>
+        <p>-</p>
+        <span :class="{active: currentStep === 2}">3</span>
+        <p>-</p>
         <span :class="{active: currentStep === 3}">4</span>
       </div>
       <h3 class="title">{{ stepTitles[currentStep] }}</h3>
@@ -27,25 +32,48 @@
             >경력을 입력해 주세요 <span class="red_txt">*</span></label
           >
         </div>
+
+        <!-- 직무, 경력 선택 영역 -->
         <div class="label-group">
-          <select v-model="job">
-            <option disabled selected hidden>직무 선택</option>
-            <option>개발</option>
-            <option>디자인</option>
-          </select>
-          <select v-model="experience" style="margin-left: 15px">
-            <option disabled selected hidden>경력 선택</option>
-            <option>1년</option>
-            <option>2년</option>
-          </select>
+          <div class="dropdown">
+            <div
+              class="dropdown-select"
+              :class="selectedJobClass"
+              @click="toggleDropdown('job')"
+            >
+              <span>{{ job || '직무 선택' }}</span>
+              <span class="arrow"></span>
+            </div>
+            <ul v-if="isJobDropdownOpen" class="dropdown-list">
+              <li @click="selectJob('개발')">개발</li>
+              <li @click="selectJob('디자인')">디자인</li>
+            </ul>
+          </div>
+
+          <div class="dropdown" style="margin-left: 15px">
+            <div
+              class="dropdown-select"
+              :class="selectedExperienceClass"
+              @click="toggleDropdown('experience')"
+            >
+              <span>{{ experience || '경력 선택' }}</span>
+              <span class="arrow"></span>
+            </div>
+            <ul v-if="isExperienceDropdownOpen" class="dropdown-list">
+              <li @click="selectExperience('1년')">1년</li>
+              <li @click="selectExperience('2년')">2년</li>
+            </ul>
+          </div>
         </div>
+
+        <!-- 소속 입력 영역 -->
         <div class="label-group">
           <label>소속을 입력해 주세요</label>
           <div class="public-private">
             <input type="radio" v-model="visibility" value="공개" />
-            <label class="public-private radio"> 공개 </label>
+            <label> 공개 </label>
             <input type="radio" v-model="visibility" value="비공개" />
-            <label class="public-private radio"> 비공개 </label>
+            <label> 비공개 </label>
           </div>
         </div>
         <input
@@ -55,29 +83,26 @@
         />
       </div>
 
+      <!-- 현재 상태 입력 영역 -->
       <div class="form-group" v-else-if="currentStep === 1">
-        <p>현재 상태를 알려주세요:</p>
         <div class="options">
-          <button
+          <div
             v-for="option in stateOptions"
             :key="option"
             @click="selectState(option)"
+            :class="{selected: selectedState === option}"
           >
             {{ option }}
-          </button>
+          </div>
         </div>
       </div>
 
       <div class="form-group" v-else-if="currentStep === 2">
         <p>관심이 있거나 보유하고 있는 스킬을 선택해 주세요:</p>
         <div class="options">
-          <button
-            v-for="skill in skills"
-            :key="skill"
-            @click="selectSkill(skill)"
-          >
+          <div v-for="skill in skills" :key="skill" @click="selectSkill(skill)">
             {{ skill }}
-          </button>
+          </div>
         </div>
       </div>
 
@@ -92,8 +117,12 @@ export default {
     return {
       isVisible: true,
       currentStep: 0,
-      job: '직무 선택',
-      experience: '경력 선택',
+      job: '',
+      experience: '',
+      isJobDropdownOpen: false,
+      isExperienceDropdownOpen: false,
+      selectedJobClass: 'default-select',
+      selectedExperienceClass: 'default-select',
       affiliation: '',
       visibility: '공개',
       selectedState: '',
@@ -106,6 +135,12 @@ export default {
       stateOptions: [
         '사이드 프로젝트 팀빌딩 중이에요',
         '사이드 프로젝트를 찾고 있어요',
+        '스터디 그룹을 찾고 있어요',
+        '스터디 팀원을 찾고 있어요',
+        '창업을 준비중이이요',
+        '초기 멤버를 찾고 있어요',
+        '공모전에 참여할 팀원을 구해요',
+        '참여할 공모전을 찾고 있어요',
       ],
       skills: ['JavaScript', 'TypeScript', 'React', 'Vue', 'Nodejs', 'Spring'],
     };
@@ -123,11 +158,33 @@ export default {
         this.currentStep--;
       }
     },
+    closePopup() {
+      this.isVisible = false;
+    },
     selectState(state) {
       this.selectedState = state;
     },
     selectSkill(skill) {
       this.selectedSkills.push(skill);
+    },
+    toggleDropdown(type) {
+      if (type === 'job') {
+        this.isJobDropdownOpen = !this.isJobDropdownOpen;
+        this.isExperienceDropdownOpen = false; // 다른 드롭다운 닫기
+      } else {
+        this.isExperienceDropdownOpen = !this.isExperienceDropdownOpen;
+        this.isJobDropdownOpen = false; // 다른 드롭다운 닫기
+      }
+    },
+    selectJob(value) {
+      this.job = value;
+      this.isJobDropdownOpen = false;
+      this.selectedJobClass = 'selected-select';
+    },
+    selectExperience(value) {
+      this.experience = value;
+      this.isExperienceDropdownOpen = false;
+      this.selectedExperienceClass = 'selected-select';
     },
   },
 };

@@ -25,21 +25,30 @@ input::placeholder {
   color: #e32728;
 }
 
+.popup-header{
+  display: flex;
+  margin-bottom: 20px;
+}
+
 .back-button {
-  position: absolute;
-  left: 20px;
-  top: 20px;
+  margin-right: auto;
   background: none;
   border: none;
-  color: #4caf50;
+  color: black;
   cursor: pointer;
-  font-size: 16px;
+}
+
+.close-button{
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
 }
 
 .step-indicator {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .step-indicator span {
@@ -53,6 +62,10 @@ input::placeholder {
   margin: 0 5px;
   font-weight: bold;
   color: white;
+}
+
+.step-indicator p {
+  color: lightgray;
 }
 
 .step-indicator span.active {
@@ -102,7 +115,7 @@ input::placeholder {
 .public-private label {
   width: 30px;
   margin-right: -1px; 
-  padding: 0 0 10px;
+  padding: 0 0 8px;
   font-size: 10px; 
 }
 
@@ -132,21 +145,85 @@ input[type='radio']:checked {
   border-radius: 4px; 
 }
 
-.options {
-  margin: 20px 0;
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
-.options button {
-  margin: 5px;
+.dropdown-select {
   padding: 10px;
-  border: none;
+  border: 1px solid #ccc;
+  color: #ccc;
   border-radius: 5px;
-  background: #f0f0f0;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  margin-left: 10px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+}
+
+.dropdown-list {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #838080;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto; 
+}
+
+.dropdown-list li {
+  padding: 10px;
   cursor: pointer;
 }
 
-.options button:hover {
-  background: #e0e0e0;
+.dropdown-list li:hover {
+  background-color: #a5caf5; /* Hover effect */
+}
+
+.selected-select {
+  color: #61d6bd; 
+  background-color: #fff; 
+  border: 1px solid #61d6bd; 
+  padding: 10px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.options div {
+  padding: 13px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #6e6868;
+  font-weight: 500;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.options div.selected {
+  background: #474b4a; 
+  color: #fff; 
 }
 
 .next-button {
@@ -160,8 +237,4 @@ input[type='radio']:checked {
   cursor: pointer;
   display: block;
   margin: 20px auto; 
-}
-
-.next-button:hover {
-  background: #61d6bd;
 }
