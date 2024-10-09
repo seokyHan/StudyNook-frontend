@@ -4,11 +4,21 @@
       <LoginPopupContent />
     </LoginPopup> -->
     <ul class="group-item">
+      <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
+        <LoginPopupContent />
+      </LoginPopup>
       <a class="item-box">
         <li class="item">
-          <div class="bookmark off">
-            <img src="@/images/bookmark_star_off.png" />
-          </div>
+          <template v-if="!getIsLogin">
+            <div class="bookmark off" @click="isLoginModal = true">
+              <img src="@/images/bookmark_star_off.png" />
+            </div>
+          </template>
+          <template v-else>
+            <div class="bookmark off">
+              <img src="@/images/bookmark_star_off.png" />
+            </div>
+          </template>
           <div class="bg-update">
             <span>✨ 2일전 업데이트</span>
           </div>
@@ -66,23 +76,56 @@
 </template>
 
 <script>
-// import LoginPopup from '@/views/PopupView.vue';
-// import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
-// import { mapActions, mapGetters, mapMutations } from 'vuex';
+import LoginPopup from '@/views/PopupView.vue';
+import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
+import {showAlert} from '@/utils/alertUtils';
+import {
+  getIsSocialLoginFirst,
+  getAcessTokenFromCookie,
+  getSocialLogin,
+  saveisLogin,
+  deleteCookie,
+} from '@/utils/cookies';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 
-// export default {
-//   components: {
-//     LoginPopup,
-//     LoginPopupContent,
-//   },
-//   computed: {
-//     ...mapGetters('memberStore', ['getNickname', 'getIsLogin']),
-//   },
-//   methods: {
-//     ...mapMutations('memberStore', ['SET_ISLOGIN', 'SET_ACCESTOKEN']),
-//     ...mapActions('memberStore', ['LOGOUT']),
-//   },
-// };
+export default {
+  components: {
+    LoginPopup,
+    LoginPopupContent,
+  },
+  data() {
+    return {
+      isLoginModal: false,
+      isVisible: false,
+    };
+  },
+  created() {
+    this.handleSocialLogin();
+  },
+  computed: {
+    ...mapGetters('memberStore', ['getIsLogin']),
+  },
+  methods: {
+    ...mapMutations('memberStore', ['SET_ISLOGIN', 'SET_ACCESTOKEN']),
+    ...mapActions('memberStore', ['LOGOUT']),
+    async handleSocialLogin() {
+      if (getIsSocialLoginFirst()) {
+        showAlert('가입이 완료되었습니다.', 'success', 1500);
+      }
+
+      if (getSocialLogin() === 'success') {
+        saveisLogin('socialLogin');
+        this.SET_ISLOGIN('memberStore/SET_ISLOGIN', true);
+        this.SET_ACCESTOKEN(getAcessTokenFromCookie());
+
+        const cookiesToDelete = ['isFirst', 'accessToken', 'socialLogin'];
+        cookiesToDelete.forEach((cookie) => deleteCookie(cookie));
+
+        await this.$router.push('/').catch(() => {});
+      }
+    },
+  },
+};
 </script>
 
 <style lang="css" scoped>
