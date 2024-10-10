@@ -90,7 +90,7 @@
             v-for="option in stateOptions"
             :key="option"
             @click="selectState(option)"
-            :class="{selected: selectedState === option}"
+            :class="{selected: selectedState.includes(option)}"
           >
             {{ option }}
           </div>
@@ -125,7 +125,7 @@ export default {
       selectedExperienceClass: 'default-select',
       affiliation: '',
       visibility: '공개',
-      selectedState: '',
+      selectedState: [],
       selectedSkills: [],
       stepTitles: [
         '업무 분야와 경력에 맞춰 딱 맞는 정보를 추천해 드릴게요!',
@@ -162,7 +162,11 @@ export default {
       this.isVisible = false;
     },
     selectState(state) {
-      this.selectedState = state;
+      if (this.selectedState.includes(state)) {
+        this.selectedState.pop(state);
+      } else {
+        this.selectedState.push(state);
+      }
     },
     selectSkill(skill) {
       this.selectedSkills.push(skill);
@@ -170,10 +174,10 @@ export default {
     toggleDropdown(type) {
       if (type === 'job') {
         this.isJobDropdownOpen = !this.isJobDropdownOpen;
-        this.isExperienceDropdownOpen = false; // 다른 드롭다운 닫기
+        this.isExperienceDropdownOpen = false;
       } else {
         this.isExperienceDropdownOpen = !this.isExperienceDropdownOpen;
-        this.isJobDropdownOpen = false; // 다른 드롭다운 닫기
+        this.isJobDropdownOpen = false;
       }
     },
     selectJob(value) {
