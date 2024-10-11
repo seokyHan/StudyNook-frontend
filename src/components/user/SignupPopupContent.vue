@@ -77,7 +77,7 @@
           </div>
         </div>
         <input
-          class="affiliation"
+          class="inputText"
           v-model="affiliation"
           placeholder="소속 학교 또는 직장 입력"
         />
@@ -98,12 +98,33 @@
       </div>
 
       <div class="form-group" v-else-if="currentStep === 2">
-        <p>관심이 있거나 보유하고 있는 스킬을 선택해 주세요:</p>
-        <div class="options">
-          <div v-for="skill in skills" :key="skill" @click="selectSkill(skill)">
-            {{ skill }}
+        <div class="categories">
+          <div
+            v-for="category in skillCategories"
+            :key="category.name"
+            @click="selectCategory(category.name)"
+            :class="{selected: selectedCategory === category.name}"
+          >
+            {{ category.name }}
           </div>
         </div>
+
+        <div class="skills" v-if="selectedCategory">
+          <div class="skills-list">
+            <div
+              v-for="skill in getSkillsForSelectedCategory()"
+              :key="skill"
+              @click="toggleSkill(skill)"
+              :class="{selected: selectedSkillList.includes(skill)}"
+            >
+              {{ skill }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" v-else-if="currentStep === 3">
+        <input class="inputText" v-model="nickName" placeholder="닉네임 입력" />
       </div>
 
       <button class="next-button" @click="nextStep">다음</button>
@@ -124,13 +145,47 @@ export default {
       selectedJobClass: 'default-select',
       selectedExperienceClass: 'default-select',
       affiliation: '',
+      nickName: '',
       visibility: '공개',
       selectedState: [],
       selectedSkills: [],
+      selectedCategory: '',
+      selectedSkillList: [],
+      skillCategories: [
+        {
+          name: '개발',
+          skills: [
+            'JavaScript',
+            'TypeScript',
+            'React',
+            'Vue',
+            'Java',
+            'Nodejs',
+            'Spring',
+          ],
+        },
+        {
+          name: '기획',
+          skills: ['일반 기획', '서비스 기획', '사업 개발', '데이터 분석'],
+        },
+        {
+          name: '디자인',
+          skills: [
+            'UI 디자인',
+            'UX 디자인',
+            '웹 디자인',
+            '그래픽 디자인',
+            'Figma',
+            'Photoshop',
+          ],
+        },
+        {name: '마케팅', skills: ['SNS 마케팅', '콘텐츠 마케팅', 'SEO', 'SEM']},
+      ],
       stepTitles: [
         '업무 분야와 경력에 맞춰 딱 맞는 정보를 추천해 드릴게요!',
         '현재 상태를 알려주세요',
         '관심이 있거나 보유하고 있는 스킬을 선택해 주세요',
+        '닉네임을 입력해주세요',
       ],
       stateOptions: [
         '사이드 프로젝트 팀빌딩 중이에요',
@@ -189,6 +244,27 @@ export default {
       this.experience = value;
       this.isExperienceDropdownOpen = false;
       this.selectedExperienceClass = 'selected-select';
+    },
+    selectCategory(category) {
+      this.selectedCategory = category;
+      this.selectedSkillList = this.skillCategories.find(
+        (cat) => cat.name === category,
+      ).skills;
+    },
+    toggleSkill(skill) {
+      const index = this.selectedSkillList.indexOf(skill);
+
+      if (index !== -1) {
+        this.selectedSkillList.splice(index, 1);
+      } else {
+        this.selectedSkillList.push(skill);
+      }
+    },
+    getSkillsForSelectedCategory() {
+      const category = this.skillCategories.find(
+        (cat) => cat.name === this.selectedCategory,
+      );
+      return category ? category.skills : [];
     },
   },
 };

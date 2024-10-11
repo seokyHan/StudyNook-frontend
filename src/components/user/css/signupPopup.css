@@ -137,12 +137,12 @@ input[type='radio']:checked {
   box-shadow: 0 0 0 1.6px #61d6bd;
 }
 
-.affiliation {
+.inputText {
   width: 100%;
   padding: 10px;
   margin-top: -10px;
   border: 1px solid #ccc;
-  border-radius: 4px; 
+  border-radius: 10px; 
 }
 
 .dropdown {
@@ -237,4 +237,51 @@ input[type='radio']:checked {
   cursor: pointer;
   display: block;
   margin: 20px auto; 
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.categories div {
+  padding: 10px 15px;
+  border-radius: 10px;
+  background: #f0f0f0;
+  color: #8b8787;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.categories div.selected {
+  background: #61d6bd;
+  color: white;
+}
+
+.skills {
+  margin-top: 20px;
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  max-height: 150px; 
+  overflow-y: auto; 
+}
+
+.skills-list div {
+  padding: 10px;
+  border-radius: 10px;
+  background: #f0f0f0;
+  color: #8b8787;
+  cursor: pointer;
+  text-align: center; 
+  transition: background 0.3s;
+}
+
+.skills-list div.selected {
+  background: #61d6bd; 
+  color: #fff; 
 }
