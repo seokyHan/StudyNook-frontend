@@ -23,7 +23,7 @@
         <p>-</p>
         <span :class="{active: currentStep === 3}">4</span>
       </div>
-      <h3 class="title">{{ stepTitles[currentStep] }}</h3>
+      <h5 class="title">{{ stepTitles[currentStep] }}</h5>
 
       <div class="form-group" v-if="currentStep === 0">
         <div class="label-group">
@@ -149,7 +149,7 @@ export default {
       visibility: '공개',
       selectedState: [],
       selectedSkills: [],
-      selectedCategory: '',
+      selectedCategory: '개발',
       selectedSkillList: [],
       skillCategories: [
         {
@@ -182,7 +182,7 @@ export default {
         {name: '마케팅', skills: ['SNS 마케팅', '콘텐츠 마케팅', 'SEO', 'SEM']},
       ],
       stepTitles: [
-        '업무 분야와 경력에 맞춰 딱 맞는 정보를 추천해 드릴게요!',
+        '업무 분야와 경력에 맞춰 딱 맞는 정보를 추천해드릴게요!',
         '현재 상태를 알려주세요',
         '관심이 있거나 보유하고 있는 스킬을 선택해 주세요',
         '닉네임을 입력해주세요',
@@ -197,7 +197,6 @@ export default {
         '공모전에 참여할 팀원을 구해요',
         '참여할 공모전을 찾고 있어요',
       ],
-      skills: ['JavaScript', 'TypeScript', 'React', 'Vue', 'Nodejs', 'Spring'],
     };
   },
   methods: {
@@ -217,11 +216,10 @@ export default {
       this.isVisible = false;
     },
     selectState(state) {
-      if (this.selectedState.includes(state)) {
-        this.selectedState.pop(state);
-      } else {
-        this.selectedState.push(state);
-      }
+      const index = this.selectedState.indexOf(state);
+      index !== -1
+        ? this.selectedState.splice(index, 1)
+        : this.selectedState.push(state);
     },
     selectSkill(skill) {
       this.selectedSkills.push(skill);
@@ -247,18 +245,12 @@ export default {
     },
     selectCategory(category) {
       this.selectedCategory = category;
-      this.selectedSkillList = this.skillCategories.find(
-        (cat) => cat.name === category,
-      ).skills;
     },
     toggleSkill(skill) {
       const index = this.selectedSkillList.indexOf(skill);
-
-      if (index !== -1) {
-        this.selectedSkillList.splice(index, 1);
-      } else {
-        this.selectedSkillList.push(skill);
-      }
+      index !== -1
+        ? this.selectedSkillList.splice(index, 1)
+        : this.selectedSkillList.push(skill);
     },
     getSkillsForSelectedCategory() {
       const category = this.skillCategories.find(
