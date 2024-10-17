@@ -16,14 +16,14 @@
       </div>
       <div class="step-indicator">
         <span :class="{active: currentStep === 0}">1</span>
-        <p>-</p>
+        <div class="step_stepLine"></div>
         <span :class="{active: currentStep === 1}">2</span>
-        <p>-</p>
+        <div class="step_stepLine"></div>
         <span :class="{active: currentStep === 2}">3</span>
-        <p>-</p>
+        <div class="step_stepLine"></div>
         <span :class="{active: currentStep === 3}">4</span>
       </div>
-      <h5 class="title">{{ stepTitles[currentStep] }}</h5>
+      <h1 class="title">{{ stepTitles[currentStep] }}</h1>
 
       <div class="form-group" v-if="currentStep === 0">
         <div class="label-group">
@@ -102,10 +102,13 @@
           <div
             v-for="category in skillCategories"
             :key="category.name"
-            @click="selectCategory(category.name)"
             :class="{selected: selectedCategory === category.name}"
+            @click="selectCategory(category.name)"
           >
-            {{ category.name }}
+            <img :src="category.imageSrc" />
+            <p>
+              {{ category.name }}
+            </p>
           </div>
         </div>
 
@@ -163,10 +166,12 @@ export default {
             'Nodejs',
             'Spring',
           ],
+          imageSrc: require('@/images/develop.png'),
         },
         {
           name: '기획',
           skills: ['일반 기획', '서비스 기획', '사업 개발', '데이터 분석'],
+          imageSrc: require('@/images/planning.png'),
         },
         {
           name: '디자인',
@@ -178,8 +183,13 @@ export default {
             'Figma',
             'Photoshop',
           ],
+          imageSrc: require('@/images/design.png'),
         },
-        {name: '마케팅', skills: ['SNS 마케팅', '콘텐츠 마케팅', 'SEO', 'SEM']},
+        {
+          name: '마케팅',
+          skills: ['SNS 마케팅', '콘텐츠 마케팅', 'SEO', 'SEM'],
+          imageSrc: require('@/images/marketing.png'),
+        },
       ],
       stepTitles: [
         '업무 분야와 경력에 맞춰 딱 맞는 정보를 추천해드릴게요!',

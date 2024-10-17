@@ -1,5 +1,5 @@
 .popup {
-  font-family : 'TmoneyRoundWind';
+  font-family : TmoneyRoundWind;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -23,6 +23,13 @@ input::placeholder {
 
 .red_txt {
   color: #e32728;
+}
+
+.step_stepLine{
+  margin-top: 8px;
+  width: 18px;
+  height: 2px;
+  background-color: #e4e4e4;
 }
 
 .popup-header{
@@ -69,15 +76,13 @@ input::placeholder {
 }
 
 .step-indicator span.active {
-  background: #61d6bd;
+  background: #6ed1c0;
 }
 
 .title {
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
-  margin-right: 38px;
-  margin-left: 38px;
+  margin: 20px 38px 20px 38px;
 }
 
 .form-group {
@@ -134,9 +139,9 @@ input[type='radio'] {
 }
 
 input[type='radio']:checked {
-  background-color: #61d6bd; 
+  background-color: #6ed1c0; 
   border: 3px solid white; 
-  box-shadow: 0 0 0 1.6px #61d6bd;
+  box-shadow: 0 0 0 1.6px #6ed1c0;
 }
 
 .inputText {
@@ -198,9 +203,9 @@ input[type='radio']:checked {
 }
 
 .selected-select {
-  color: #61d6bd; 
+  color: #6ed1c0; 
   background-color: #fff; 
-  border: 1px solid #61d6bd; 
+  border: 1px solid #6ed1c0; 
   padding: 10px;
 }
 
@@ -212,12 +217,12 @@ input[type='radio']:checked {
 }
 
 .options div {
-  padding: 13px;
-  border-radius: 20px;
-  background: #f0f0f0;
-  color: #1f1e1e;
+  padding: 10px 0 13px;
+  border-radius: 30px;
+  background: #f7f7f7;
+  color: #333;
   font-weight: 1000;
-  font-size: 9px;
+  font-size: 11px;
   cursor: pointer;
   text-align: center;
   transition: background 0.3s;
@@ -229,7 +234,7 @@ input[type='radio']:checked {
 }
 
 .next-button {
-  background: #61d6bd;
+  background: #6ed1c0;
   color: white;
   width: 100%;
   font-weight: bold;
@@ -244,25 +249,41 @@ input[type='radio']:checked {
 .categories {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
+}
+
+.categories p{
+  margin-left: -5px;
+  text-align: center;
+  width: 39px;
+  font-size: 13px;
+  color: #999;
+}
+
+.categories img {
+  margin-bottom: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .categories div {
-  padding: 10px 15px;
-  border-radius: 30px;
-  background: #f0f0f0;
-  color: #8b8787;
+  width: 50px;
+  height: 50px;
+  padding: 10px 10px;
+  border-radius: 50%;
+  background: #f7f7f7;
+  color: #333;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 .categories div.selected {
-  background: #61d6bd;
-  color: white;
+  background: #e6fffb;
+  border: 1px solid #6ed1c0;
 }
 
 .skills {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 .skills-list {
@@ -275,11 +296,11 @@ input[type='radio']:checked {
 
 .skills-list div {
   padding: 10px;
-  border-radius: 10px;
-  background: #f0f0f0;
-  color: #1f1e1e;
+  border-radius: 20px;
+  background: #f7f7f7;
+  color: #333;
   font-weight: 1000;
-  font-size: 10px;
+  font-size: 11px;
   cursor: pointer;
   text-align: center; 
   transition: background 0.3s;
