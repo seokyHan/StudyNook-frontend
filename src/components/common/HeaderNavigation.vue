@@ -11,12 +11,6 @@
         </li>
       </ul>
 
-      <LoginPopup v-if="isLoginModal" @close-modal="isLoginModal = false">
-        <LoginPopupContent />
-      </LoginPopup>
-
-      <SignupPopupContent v-if="isVisible" />
-
       <template v-if="!getIsLogin">
         <div class="button-list">
           <button
@@ -95,11 +89,18 @@
         </div>
       </template>
     </div>
+    <Popup v-if="isLoginModal" @close-modal="isLoginModal = false">
+      <LoginPopupContent />
+    </Popup>
+
+    <Popup v-if="isVisible" @close-modal="isVisible = false">
+      <SignupPopupContent />
+    </Popup>
   </div>
 </template>
 
 <script>
-import LoginPopup from '@/views/PopupView.vue';
+import Popup from '@/views/PopupView.vue';
 import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
 import SignupPopupContent from '@/components/user/SignupPopupContent.vue';
 import {showAlert} from '@/utils/alertUtils';
@@ -114,7 +115,7 @@ import {mapActions, mapGetters, mapMutations} from 'vuex';
 
 export default {
   components: {
-    LoginPopup,
+    Popup,
     LoginPopupContent,
     SignupPopupContent,
   },
@@ -122,7 +123,7 @@ export default {
     return {
       buttonText: '로그인',
       isLoginModal: false,
-      isVisible: true,
+      isVisible: false,
       menuItems: ['menu1', 'menu2', 'menu3', 'menu4'],
     };
   },
