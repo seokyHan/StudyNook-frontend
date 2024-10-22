@@ -1,7 +1,8 @@
 .login-box {
-  width: 400px;
+  width: 460px;
   position: relative;
-  height: 380px;
+  height: 430px;
+  padding: 20px;
 }
 
 .login-box .login-intro {
