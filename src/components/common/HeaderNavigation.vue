@@ -15,7 +15,7 @@
         <div class="button-list">
           <button
             class="fast white"
-            @click="isLoginModal = true"
+            @click="openLoginPopup"
             v-html="formattedButtonText"
           ></button>
         </div>
@@ -94,7 +94,7 @@
     </Popup>
 
     <Popup v-if="isVisible" @close-modal="isVisible = false">
-      <SignupPopupContent />
+      <SignupPopupContent @close-modal="isVisible = false" />
     </Popup>
   </div>
 </template>
@@ -103,9 +103,8 @@
 import Popup from '@/views/PopupView.vue';
 import LoginPopupContent from '@/components/user/LoginPopupContent.vue';
 import SignupPopupContent from '@/components/user/SignupPopupContent.vue';
-import {showAlert} from '@/utils/alertUtils';
+
 import {
-  getIsSocialLoginFirst,
   getAcessTokenFromCookie,
   getSocialLogin,
   saveisLogin,
@@ -131,7 +130,7 @@ export default {
     this.handleSocialLogin();
   },
   computed: {
-    ...mapGetters('memberStore', ['getNickname', 'getIsLogin']),
+    ...mapGetters('memberStore', ['getNickname', 'getIsLogin', 'getIsFirst']),
     formattedButtonText() {
       return (
         '<div><span>' +
@@ -144,8 +143,9 @@ export default {
     ...mapMutations('memberStore', ['SET_ISLOGIN', 'SET_ACCESTOKEN']),
     ...mapActions('memberStore', ['LOGOUT']),
     async handleSocialLogin() {
-      if (getIsSocialLoginFirst()) {
-        showAlert('가입이 완료되었습니다.', 'success', 1500);
+      if (this.getIsFirst) {
+        deleteCookie('isFirst');
+        this.isVisible = true;
       }
 
       if (getSocialLogin() === 'success') {
@@ -153,10 +153,17 @@ export default {
         this.SET_ISLOGIN('memberStore/SET_ISLOGIN', true);
         this.SET_ACCESTOKEN(getAcessTokenFromCookie());
 
-        const cookiesToDelete = ['isFirst', 'accessToken', 'socialLogin'];
+        const cookiesToDelete = ['accessToken', 'socialLogin'];
         cookiesToDelete.forEach((cookie) => deleteCookie(cookie));
 
         await this.$router.push('/').catch(() => {});
+      }
+    },
+    openLoginPopup() {
+      if (this.getIsFirst) {
+        this.isVisible = true;
+      } else {
+        this.isLoginModal = true;
       }
     },
     showConfirm() {

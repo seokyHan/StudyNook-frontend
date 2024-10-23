@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="popup">
+  <div class="popup">
     <div class="popup-content">
       <div class="popup-header">
         <span
@@ -10,7 +10,7 @@
           arrow_back_ios
         </span>
 
-        <span class="material-icons close-button" @click="closePopup"
+        <span class="material-icons close-button" @click="$emit('close-modal')"
           >close</span
         >
       </div>
@@ -139,7 +139,6 @@
 export default {
   data() {
     return {
-      isVisible: true,
       currentStep: 0,
       job: '',
       experience: '',
@@ -251,17 +250,12 @@ export default {
     nextStep() {
       if (this.currentStep < this.stepTitles.length) {
         this.currentStep++;
-      } else {
-        this.isVisible = false;
       }
     },
     goBack() {
       if (this.currentStep > 0) {
         this.currentStep--;
       }
-    },
-    closePopup() {
-      this.isVisible = false;
     },
     selectState(state) {
       const index = this.selectedState.indexOf(state);
