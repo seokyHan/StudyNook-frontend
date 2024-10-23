@@ -18,9 +18,19 @@
   position: relative;
   max-width: fit-content;
   margin: auto;
-  margin-top: 10%;
+  margin-top: 13%;
   background-color: white;
   min-height: 300px;
   z-index: 1001;
   opacity: 1;
+  animation: fadeInDown 0.7s;
+}
+
+@keyframes fadeInDown {
+  0% {
+      transform: translate3d(0, -150%, 0);
+  }
+  to {
+      transform: translateZ(100);
+  }
 }
