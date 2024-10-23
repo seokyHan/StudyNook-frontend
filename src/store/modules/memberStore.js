@@ -3,6 +3,7 @@ import {
   getEmailFromCookie,
   getNicknameFromCookie,
   getIsLoginFromStorage,
+  getIsSocialLoginFirst,
   deleteIsLogin,
   clearAllCookies,
 } from '@/utils/cookies';
@@ -16,6 +17,7 @@ const memberStore = {
     email: getEmailFromCookie() || '',
     nickname: getNicknameFromCookie() || '',
     isLogin: getIsLoginFromStorage() != null,
+    isFirst: getIsSocialLoginFirst() || false,
   },
   getters: {
     getIsLogin(state) {
@@ -32,6 +34,9 @@ const memberStore = {
     },
     getNickname(state) {
       return decodeURI(state.nickname);
+    },
+    getIsFirst(state) {
+      return state.isFirst;
     },
   },
   mutations: {
