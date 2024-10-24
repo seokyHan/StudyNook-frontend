@@ -139,6 +139,14 @@ export default {
       );
     },
   },
+  watch: {
+    isVisible(isOpen) {
+      this.toggleBodyOverflow(isOpen);
+    },
+    isLoginModal(isOpen) {
+      this.toggleBodyOverflow(isOpen);
+    },
+  },
   methods: {
     ...mapMutations('memberStore', ['SET_ISLOGIN', 'SET_ACCESTOKEN']),
     ...mapActions('memberStore', ['LOGOUT']),
@@ -164,6 +172,13 @@ export default {
         this.isVisible = true;
       } else {
         this.isLoginModal = true;
+      }
+    },
+    toggleBodyOverflow(isOpen) {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.removeProperty('overflow');
       }
     },
     showConfirm() {
