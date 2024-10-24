@@ -45,8 +45,9 @@
               <span class="arrow"></span>
             </div>
             <ul v-if="isJobDropdownOpen" class="dropdown-list">
-              <li @click="selectJob('개발')">개발</li>
-              <li @click="selectJob('디자인')">디자인</li>
+              <li v-for="jop in jobOptions" :key="jop" @click="selectJob(jop)">
+                {{ jop }}
+              </li>
             </ul>
           </div>
 
@@ -60,8 +61,13 @@
               <span class="arrow"></span>
             </div>
             <ul v-if="isExperienceDropdownOpen" class="dropdown-list">
-              <li @click="selectExperience('1년')">1년</li>
-              <li @click="selectExperience('2년')">2년</li>
+              <li
+                v-for="experience in experienceOptions"
+                :key="experience"
+                @click="selectExperience(experience)"
+              >
+                {{ experience }}
+              </li>
             </ul>
           </div>
         </div>
@@ -97,6 +103,7 @@
         </div>
       </div>
 
+      <!-- Skill 입력 영역 -->
       <div class="form-group" v-else-if="currentStep === 2">
         <div class="categories">
           <div
@@ -126,11 +133,17 @@
         </div>
       </div>
 
+      <!-- 닉네임 입력 영역 -->
       <div class="form-group" v-else-if="currentStep === 3">
         <input class="inputText" v-model="nickName" placeholder="닉네임 입력" />
       </div>
 
-      <button class="next-button" @click="nextStep">다음</button>
+      <template v-if="currentStep === 3">
+        <button class="next-button" @click="nextStep">프로필저장</button>
+      </template>
+      <template v-else>
+        <button class="next-button" @click="nextStep">다음</button>
+      </template>
     </div>
   </div>
 </template>
@@ -148,11 +161,35 @@ export default {
       selectedExperienceClass: 'default-select',
       affiliation: '',
       nickName: '',
-      visibility: '공개',
+      visibility: '',
       selectedState: [],
       selectedSkills: [],
       selectedCategory: '개발',
       selectedSkillList: [],
+      jobOptions: [
+        '프론트엔드',
+        '백엔드',
+        '디자이너',
+        'IOS',
+        '안드로이드',
+        'DevOps',
+        'PM',
+        '기획자',
+        '마케터',
+      ],
+      experienceOptions: [
+        '0년',
+        '1년',
+        '2년',
+        '3년',
+        '4년',
+        '5년',
+        '6년',
+        '7년',
+        '8년',
+        '9년',
+        '10년',
+      ],
       skillCategories: [
         {
           name: '개발',
