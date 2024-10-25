@@ -149,6 +149,7 @@
 </template>
 
 <script>
+import {showAlert} from '@/utils/alertUtils';
 export default {
   data() {
     return {
@@ -285,6 +286,14 @@ export default {
   },
   methods: {
     nextStep() {
+      if (this.currentStep === 0 && this.job === '') {
+        showAlert('직무를 선택해주세요.', 'warning', 1500);
+        return;
+      } else if (this.currentStep === 0 && this.experience === '') {
+        showAlert('경력을 선택해주세요.', 'warning', 1500);
+        return;
+      }
+
       if (this.currentStep < this.stepTitles.length) {
         this.currentStep++;
       }
