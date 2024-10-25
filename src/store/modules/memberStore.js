@@ -18,7 +18,7 @@ const memberStore = {
     isFirst: getIsSocialLoginFirst() || false,
     job: '',
     experience: '',
-    visibility: '비공개',
+    visibility: '',
     affiliation: '',
     currentStatus: [],
     category: '',
