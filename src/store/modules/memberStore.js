@@ -1,7 +1,6 @@
 import {
   getIdFromCookie,
   getEmailFromCookie,
-  getNicknameFromCookie,
   getIsLoginFromStorage,
   getIsSocialLoginFirst,
   deleteIsLogin,
@@ -15,9 +14,16 @@ const memberStore = {
     accessToken: '',
     id: getIdFromCookie() || '',
     email: getEmailFromCookie() || '',
-    nickname: getNicknameFromCookie() || '',
     isLogin: getIsLoginFromStorage() != null,
     isFirst: getIsSocialLoginFirst() || false,
+    job: '',
+    experience: '',
+    visibility: '비공개',
+    affiliation: '',
+    currentStatus: [],
+    category: '',
+    skills: [],
+    nickname: '',
   },
   getters: {
     getIsLogin(state) {
