@@ -158,7 +158,7 @@ export default {
 
       if (getSocialLogin() === 'success') {
         saveisLogin('socialLogin');
-        this.SET_ISLOGIN('memberStore/SET_ISLOGIN', true);
+        this.SET_ISLOGIN(true);
         this.SET_ACCESTOKEN(getAcessTokenFromCookie());
 
         const cookiesToDelete = ['accessToken', 'socialLogin'];
