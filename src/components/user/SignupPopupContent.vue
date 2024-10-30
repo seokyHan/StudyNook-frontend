@@ -23,7 +23,9 @@
         <div class="step_stepLine"></div>
         <span :class="{active: currentStep === 3}">4</span>
       </div>
-      <h1 class="title">{{ stepTitles[currentStep] }}</h1>
+      <h1 class="title" v-if="stepTitles.length > 0">
+        {{ stepTitles[currentStep]['codeName'] }}
+      </h1>
 
       <div class="form-group" v-if="currentStep === 0">
         <div class="label-group">
@@ -41,12 +43,16 @@
               :class="selectedJobClass"
               @click="toggleDropdown('job')"
             >
-              <span>{{ job || '직무 선택' }}</span>
+              <span>{{ this.getJob || '직무 선택' }}</span>
               <span class="arrow"></span>
             </div>
             <ul v-if="isJobDropdownOpen" class="dropdown-list">
-              <li v-for="jop in jobOptions" :key="jop" @click="selectJob(jop)">
-                {{ jop }}
+              <li
+                v-for="(job, index) in jobOptions"
+                :key="index"
+                @click="selectJob(job)"
+              >
+                {{ job.codeName }}
               </li>
             </ul>
           </div>
@@ -57,16 +63,16 @@
               :class="selectedExperienceClass"
               @click="toggleDropdown('experience')"
             >
-              <span>{{ experience || '경력 선택' }}</span>
+              <span>{{ this.getExperience || '경력 선택' }}</span>
               <span class="arrow"></span>
             </div>
             <ul v-if="isExperienceDropdownOpen" class="dropdown-list">
               <li
-                v-for="experience in experienceOptions"
-                :key="experience"
+                v-for="(experience, index) in experienceOptions"
+                :key="index"
                 @click="selectExperience(experience)"
               >
-                {{ experience }}
+                {{ experience.codeName }}
               </li>
             </ul>
           </div>
@@ -76,9 +82,19 @@
         <div class="label-group">
           <label>소속을 입력해 주세요</label>
           <div class="public-private">
-            <input type="radio" v-model="visibility" value="공개" />
+            <input
+              type="radio"
+              v-model="visibility"
+              @click="setVisibility"
+              value="공개"
+            />
             <label> 공개 </label>
-            <input type="radio" v-model="visibility" value="비공개" />
+            <input
+              type="radio"
+              v-model="visibility"
+              @click="setVisibility"
+              value="비공개"
+            />
             <label> 비공개 </label>
           </div>
         </div>
@@ -86,6 +102,7 @@
           class="inputText"
           v-model="affiliation"
           placeholder="소속 학교 또는 직장 입력"
+          @input="setAffiliation"
         />
       </div>
 
@@ -93,12 +110,12 @@
       <div class="form-group" v-else-if="currentStep === 1">
         <div class="options">
           <div
-            v-for="option in stateOptions"
-            :key="option"
+            v-for="(option, index) in stateOptions"
+            :key="index"
             @click="selectState(option)"
-            :class="{selected: selectedState.includes(option)}"
+            :class="{selected: selectedState.includes(option.id)}"
           >
-            {{ option }}
+            {{ option.codeName }}
           </div>
         </div>
       </div>
@@ -122,12 +139,12 @@
         <div class="skills" v-if="selectedCategory">
           <div class="skills-list">
             <div
-              v-for="skill in getSkillsForSelectedCategory()"
-              :key="skill"
+              v-for="(skill, index) in getSkillsForSelectedCategory()"
+              :key="index"
               @click="toggleSkill(skill)"
-              :class="{selected: selectedSkillList.includes(skill)}"
+              :class="{selected: selectedSkillList.includes(skill.id)}"
             >
-              {{ skill }}
+              {{ skill.codeName }}
             </div>
           </div>
         </div>
@@ -135,7 +152,12 @@
 
       <!-- 닉네임 입력 영역 -->
       <div class="form-group" v-else-if="currentStep === 3">
-        <input class="inputText" v-model="nickName" placeholder="닉네임 입력" />
+        <input
+          class="inputText"
+          v-model="nickName"
+          @input="setNickName"
+          placeholder="닉네임 입력"
+        />
       </div>
 
       <template v-if="currentStep === 3">
@@ -150,6 +172,8 @@
 
 <script>
 import {showAlert} from '@/utils/alertUtils';
+import {signUpOptions} from '@/api/member';
+import {mapGetters, mapMutations} from 'vuex';
 export default {
   data() {
     return {
@@ -164,127 +188,42 @@ export default {
       nickName: '',
       visibility: '',
       selectedState: [],
-      selectedSkills: [],
-      selectedCategory: '개발',
+      selectedCategory: '',
       selectedSkillList: [],
-      jobOptions: [
-        '프론트엔드',
-        '백엔드',
-        '디자이너',
-        'IOS',
-        '안드로이드',
-        'DevOps',
-        'PM',
-        '기획자',
-        '마케터',
-      ],
-      experienceOptions: [
-        '0년',
-        '1년',
-        '2년',
-        '3년',
-        '4년',
-        '5년',
-        '6년',
-        '7년',
-        '8년',
-        '9년',
-        '10년',
-      ],
-      skillCategories: [
-        {
-          name: '개발',
-          skills: [
-            'JavaScript',
-            'TypeScript',
-            'React',
-            'Vue',
-            'Nodejs',
-            'Spring',
-            'Java',
-            'Nextjs',
-            'Nestjs',
-            'Express',
-            'Go',
-            'C',
-            'Python',
-            'Django',
-            'Swift',
-            'Kotlin',
-            'MySQL',
-            'MongoDB',
-            'php',
-            'GraphQL',
-            'Firebase',
-            'ReactNative',
-            'Unity',
-            'Flutter',
-            'AWS',
-            'Kubernetes',
-            'Docker',
-            'Git',
-            'Svelte',
-          ],
-          imageSrc: require('@/images/develop.png'),
-        },
-        {
-          name: '기획',
-          skills: ['일반 기획', '서비스 기획', '사업 개발', '데이터 분석'],
-          imageSrc: require('@/images/planning.png'),
-        },
-        {
-          name: '디자인',
-          skills: [
-            'UI 디자인',
-            'UX 디자인',
-            '웹 디자인',
-            '그래픽 디자인',
-            'Figma',
-            'Photoshop',
-            'Illustrator',
-            'XD',
-            'Zeplin',
-            'Sketch',
-            'PhotoPie',
-            '3D',
-          ],
-          imageSrc: require('@/images/design.png'),
-        },
-        {
-          name: '마케팅',
-          skills: [
-            '브랜드 마케팅',
-            '그로스 마케팅',
-            '콘텐츠 마케팅',
-            '퍼포먼스 마케팅',
-            'PR',
-            '앱 마케팅',
-            '프로모션 마케팅',
-            '제휴 마케팅',
-            '캠페인 마케팅',
-          ],
-          imageSrc: require('@/images/marketing.png'),
-        },
-      ],
-      stepTitles: [
-        '업무 분야와 경력에 맞춰 딱 맞는 정보를 추천해드릴게요!',
-        '현재 상태를 알려주세요',
-        '관심이 있거나 보유하고 있는 스킬을 선택해 주세요',
-        '닉네임을 입력해주세요',
-      ],
-      stateOptions: [
-        '사이드 프로젝트 팀빌딩 중이에요',
-        '사이드 프로젝트를 찾고 있어요',
-        '스터디 그룹을 찾고 있어요',
-        '스터디 팀원을 찾고 있어요',
-        '창업을 준비중이이요',
-        '초기 멤버를 찾고 있어요',
-        '공모전에 참여할 팀원을 구해요',
-        '참여할 공모전을 찾고 있어요',
-      ],
+      jobOptions: [],
+      experienceOptions: [],
+      skillCategories: [],
+      stepTitles: [],
+      stateOptions: [],
     };
   },
+  created() {
+    this.getSignUpOptions();
+    this.getStateSignUpOptions();
+  },
+  computed: {
+    ...mapGetters('memberStore', [
+      'getJob',
+      'getExperience',
+      'getVisibility',
+      'getAffiliation',
+      'getCurrentStatus',
+      'getCategory',
+      'getSkills',
+      'getNickname',
+    ]),
+  },
   methods: {
+    ...mapMutations('memberStore', [
+      'SET_JOB',
+      'SET_EXPERIENCE',
+      'SET_VISIBILITY',
+      'SET_AFFILIATION',
+      'SET_CURRENTSTATUS',
+      'SET_CATEGORY',
+      'SET_SKILLS',
+      'SET_NICKNAME',
+    ]),
     nextStep() {
       if (this.currentStep === 0 && this.job === '') {
         showAlert('직무를 선택해주세요.', 'warning', 1500);
@@ -303,15 +242,6 @@ export default {
         this.currentStep--;
       }
     },
-    selectState(state) {
-      const index = this.selectedState.indexOf(state);
-      index !== -1
-        ? this.selectedState.splice(index, 1)
-        : this.selectedState.push(state);
-    },
-    selectSkill(skill) {
-      this.selectedSkills.push(skill);
-    },
     toggleDropdown(type) {
       if (type === 'job') {
         this.isJobDropdownOpen = !this.isJobDropdownOpen;
@@ -322,29 +252,85 @@ export default {
       }
     },
     selectJob(value) {
-      this.job = value;
+      this.job = value.id;
+      this.SET_JOB(value.codeName);
       this.isJobDropdownOpen = false;
       this.selectedJobClass = 'selected-select';
     },
     selectExperience(value) {
-      this.experience = value;
+      this.experience = value.id;
+      this.SET_EXPERIENCE(value.codeName);
       this.isExperienceDropdownOpen = false;
       this.selectedExperienceClass = 'selected-select';
     },
+    selectState(option) {
+      const index = this.selectedState.indexOf(option.id);
+      index !== -1
+        ? this.selectedState.splice(index, 1)
+        : this.selectedState.push(option.id);
+
+      this.SET_CURRENTSTATUS(this.selectedState);
+    },
     selectCategory(category) {
       this.selectedCategory = category;
+      this.SET_CATEGORY(this.selectedCategory);
     },
     toggleSkill(skill) {
-      const index = this.selectedSkillList.indexOf(skill);
+      const index = this.selectedSkillList.indexOf(skill.id);
       index !== -1
         ? this.selectedSkillList.splice(index, 1)
-        : this.selectedSkillList.push(skill);
+        : this.selectedSkillList.push(skill.id);
+
+      this.SET_SKILLS(this.selectedSkillList);
     },
     getSkillsForSelectedCategory() {
       const category = this.skillCategories.find(
         (cat) => cat.name === this.selectedCategory,
       );
       return category ? category.skills : [];
+    },
+    setVisibility(e) {
+      this.visibility = e.target.value;
+      this.SET_VISIBILITY(this.visibility);
+    },
+    setAffiliation(e) {
+      this.affiliation = e.target.value;
+      this.SET_AFFILIATION(this.affiliation);
+    },
+    setNickName(e) {
+      this.nickName = e.target.value;
+      this.SET_NICKNAME(this.nickName);
+    },
+    async getSignUpOptions() {
+      const {data} = await signUpOptions();
+
+      this.jobOptions = [...data.jobOptions];
+      this.experienceOptions = [...data.experienceOptions];
+      this.skillCategories = [...data.skillCategories];
+      this.stepTitles = [...data.stepTitles];
+      this.stateOptions = [...data.stateOptions];
+    },
+    getStateSignUpOptions() {
+      this.job = this.getJob;
+      if (this.job !== '') {
+        this.selectedJobClass = 'selected-select';
+      }
+      this.experience = this.getExperience;
+      if (this.experience !== '') {
+        this.selectedExperienceClass = 'selected-select';
+      }
+      this.visibility = this.getVisibility;
+      if (this.visibility == '') {
+        this.visibility = '비공개';
+      }
+      this.affiliation = this.getAffiliation;
+      this.selectedState = this.getCurrentStatus;
+      this.selectedCategory = this.getCategory;
+      if (this.selectedCategory == '') {
+        this.selectedCategory = '개발';
+      }
+      this.selectedSkillList = this.getSkills;
+      this.nickName = this.getNickname;
     },
   },
 };

@@ -38,6 +38,27 @@ const memberStore = {
     getEmail(state) {
       return decodeURI(state.email);
     },
+    getJob(state) {
+      return state.job;
+    },
+    getExperience(state) {
+      return state.experience;
+    },
+    getVisibility(state) {
+      return state.visibility;
+    },
+    getAffiliation(state) {
+      return state.affiliation;
+    },
+    getCurrentStatus(state) {
+      return state.currentStatus;
+    },
+    getCategory(state) {
+      return state.category;
+    },
+    getSkills(state) {
+      return state.skills;
+    },
     getNickname(state) {
       return decodeURI(state.nickname);
     },
@@ -55,11 +76,32 @@ const memberStore = {
     SET_ID(state, id) {
       state.id = id;
     },
-    SET_NICKNAME(state, nickname) {
-      state.nickname = nickname;
-    },
     SET_ISLOGIN(state, isLogin) {
       state.isLogin = isLogin;
+    },
+    SET_JOB(state, job) {
+      state.job = job;
+    },
+    SET_EXPERIENCE(state, experience) {
+      state.experience = experience;
+    },
+    SET_VISIBILITY(state, visibility) {
+      state.visibility = visibility;
+    },
+    SET_AFFILIATION(state, affiliation) {
+      state.affiliation = affiliation;
+    },
+    SET_CURRENTSTATUS(state, currentStatus) {
+      state.currentStatus = currentStatus;
+    },
+    SET_CATEGORY(state, category) {
+      state.category = category;
+    },
+    SET_SKILLS(state, skills) {
+      state.skills = skills;
+    },
+    SET_NICKNAME(state, nickname) {
+      state.nickname = nickname;
     },
     CLEAR_ALL(state) {
       state.accessToken = '';
