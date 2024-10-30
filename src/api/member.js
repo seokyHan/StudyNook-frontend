@@ -4,8 +4,12 @@ function reissue() {
   return instance.post('/members/reissue');
 }
 
+function signUpOptions() {
+  return instance.get('/options');
+}
+
 function memberLogOut() {
   return instanceWithAuth.post('/members/logout');
 }
 
-export {memberLogOut, reissue};
+export {reissue, signUpOptions, memberLogOut};
