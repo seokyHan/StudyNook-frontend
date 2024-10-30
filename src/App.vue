@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://webfontworld.github.io/tmoney/TmoneyRoundWind.css');
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css');
 @import url('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css');

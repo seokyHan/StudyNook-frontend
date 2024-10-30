@@ -1,5 +1,5 @@
 .popup {
-  font-family : inherit;
+  font-family : 'NanumSquare', sans-serif;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -81,7 +81,7 @@ input::placeholder {
 
 .title {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 800;
   margin: 20px 38px 20px 38px;
 }
 
@@ -100,6 +100,7 @@ input::placeholder {
 
 .label-group label {
   flex: 1; 
+  font-weight: 800;
   margin-right: 10px; 
   margin-top: 10px;
   text-align: left; 
@@ -150,6 +151,7 @@ input[type='radio']:checked {
   margin-top: -10px;
   border: 1px solid #ccc;
   border-radius: 10px; 
+  outline: none;
 }
 
 .dropdown {
